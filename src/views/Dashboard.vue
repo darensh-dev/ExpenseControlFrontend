@@ -16,7 +16,9 @@
 
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12">
-        <div class="bg-[#181f2a] rounded-2xl shadow-xl p-7 min-h-[350px] flex items-center justify-center">
+        <div
+          class="bg-[#5e5e5e] dark:bg-[#181f2a] rounded-2xl shadow-xl p-7 min-h-[350px] flex items-center justify-center"
+        >
           <div class="w-full">
             <h2 class="text-2xl font-bold mb-4">Presupuesto por Tipo de Gasto</h2>
             <Chart type="bar" :data="budgetComparisonData" :options="budgetComparisonOptions" class="h-30rem" />
