@@ -30,12 +30,6 @@
             />
           </IconField>
           <div class="flex gap-2">
-            <IconField>
-              <InputIcon>
-                <i class="pi pi-search" />
-              </InputIcon>
-              <InputText v-model="search" placeholder="Filtrar por monto" />
-            </IconField>
             <Select
               v-model="monetaryFundFilter"
               :options="listExpenseTypeOnDeposit"
@@ -45,6 +39,12 @@
               style="width: 210px"
               show-clear
             />
+            <IconField>
+              <InputIcon>
+                <i class="pi pi-search" />
+              </InputIcon>
+              <InputText v-model="search" placeholder="Filtrar por monto" />
+            </IconField>
           </div>
         </div>
       </template>
