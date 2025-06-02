@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-4xl font-bold mb-8 text-white">Dashboard</h1>
+    <h1 class="text-4xl font-bold mb-8">Dashboard</h1>
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
       <div class="flex flex-col md:flex-row gap-2 items-end">
         <Calendar
@@ -18,7 +18,7 @@
       <div class="col-span-12">
         <div class="bg-[#181f2a] rounded-2xl shadow-xl p-7 min-h-[350px] flex items-center justify-center">
           <div class="w-full">
-            <h2 class="text-2xl font-bold text-white mb-4">Presupuesto por Tipo de Gasto</h2>
+            <h2 class="text-2xl font-bold mb-4">Presupuesto por Tipo de Gasto</h2>
             <Chart type="bar" :data="budgetComparisonData" :options="budgetComparisonOptions" class="h-30rem" />
           </div>
         </div>

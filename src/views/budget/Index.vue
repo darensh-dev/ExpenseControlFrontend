@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-4xl font-bold mb-8 text-white">Presupuestos</h1>
+    <h1 class="text-4xl font-bold mb-8">Presupuestos</h1>
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
       <div class="flex flex-col md:flex-row gap-2 items-end">
         <Select
