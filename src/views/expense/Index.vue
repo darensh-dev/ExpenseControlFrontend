@@ -94,7 +94,12 @@
         {{ formatDate(data.date) }}
       </template>
       <template #filter="{ filterModel }">
-        <DatePicker v-model="filterModel.value" date-format="dd/mm/yy" placeholder="dd/mm/yyyy" />
+        <DatePicker
+          v-model="filterModel.value"
+          date-format="dd/mm/yy"
+          :max-date="new Date()"
+          placeholder="dd/mm/yyyy"
+        />
       </template>
     </Column>
     <Column field="createdAt" header="Fecha Creacion" data-type="date">
@@ -102,7 +107,12 @@
         {{ formatDate(data.date) }}
       </template>
       <template #filter="{ filterModel }">
-        <DatePicker v-model="filterModel.value" date-format="dd/mm/yy" placeholder="dd/mm/yyyy" />
+        <DatePicker
+          v-model="filterModel.value"
+          date-format="dd/mm/yy"
+          :max-date="new Date()"
+          placeholder="dd/mm/yyyy"
+        />
       </template>
     </Column>
     <template #expansion="slotProps">
@@ -191,7 +201,14 @@
               <InputIcon>
                 <i class="pi pi-calendar" />
               </InputIcon>
-              <DatePicker v-model="date" placeholder="Mes" view="month" date-format="mm/yy" class="w-full" />
+              <DatePicker
+                v-model="date"
+                placeholder="Mes"
+                view="month"
+                date-format="mm/yy"
+                :max-date="new Date()"
+                class="w-full"
+              />
             </IconField>
             <small v-if="errors.date" class="text-red-500">{{ errors.date }}</small>
           </div>

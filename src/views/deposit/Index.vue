@@ -80,7 +80,12 @@
           {{ formatDate(data.date) }}
         </template>
         <template #filter="{ filterModel }">
-          <DatePicker v-model="filterModel.value" date-format="dd/mm/yy" placeholder="dd/mm/yyyy" />
+          <DatePicker
+            v-model="filterModel.value"
+            date-format="dd/mm/yy"
+            :max-date="new Date()"
+            placeholder="dd/mm/yyyy"
+          />
         </template>
       </Column>
 

@@ -21,7 +21,14 @@
             <InputIcon>
               <i class="pi pi-calendar" />
             </InputIcon>
-            <DatePicker v-model="month" placeholder="Mes" view="month" date-format="mm/yy" class="w-full" />
+            <DatePicker
+              v-model="month"
+              placeholder="Mes"
+              view="month"
+              :max-date="new Date()"
+              date-format="mm/yy"
+              class="w-full"
+            />
           </IconField>
 
           <small v-if="errors.month" class="text-red-400">El mes es requerido.</small>
