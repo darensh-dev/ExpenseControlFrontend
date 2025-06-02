@@ -16,22 +16,28 @@
     >
       <template #header>
         <div class="flex justify-between items-center gap-2">
+          <IconField>
+            <InputIcon>
+              <i class="pi pi-calendar" />
+            </InputIcon>
+            <DatePicker
+              v-model="monthFilter"
+              placeholder="Mes"
+              view="month"
+              date-format="mm/yy"
+              :max-date="new Date()"
+              style="width: 210px"
+            />
+          </IconField>
           <div class="flex gap-2">
             <IconField>
               <InputIcon>
-                <i class="pi pi-calendar" />
+                <i class="pi pi-search" />
               </InputIcon>
-              <DatePicker
-                v-model="monthFilter"
-                placeholder="Mes"
-                view="month"
-                date-format="mm/yy"
-                style="width: 210px"
-              />
+              <InputText v-model="search" placeholder="Filtrar por monto" />
             </IconField>
-
             <Select
-              v-model="fundFilter"
+              v-model="monetaryFundFilter"
               :options="listExpenseTypeOnDeposit"
               option-label="name"
               option-value="id"
@@ -40,12 +46,6 @@
               show-clear
             />
           </div>
-          <IconField>
-            <InputIcon>
-              <i class="pi pi-search" />
-            </InputIcon>
-            <InputText placeholder="Buscar..." />
-          </IconField>
         </div>
       </template>
 
@@ -112,10 +112,21 @@ const {
 
 const showModal = ref(false);
 const depositToEdit = ref(null);
-const fundFilter = ref(null);
+const search = ref("");
+const monetaryFundFilter = ref(null);
 
 const filteredDeposits = computed(() => {
-  return listDeposit.value;
+  return listDeposit.value.filter((tx) => {
+    const searchLower = search.value.toLowerCase();
+
+    const matchesSearch = search.value
+      ? tx.description?.toLowerCase().includes(searchLower) || tx.amount?.toString().includes(searchLower)
+      : true;
+
+    const matchesMonetaryFund = monetaryFundFilter.value ? tx.monetaryFund?.id === monetaryFundFilter.value : true;
+
+    return matchesSearch && matchesMonetaryFund;
+  });
 });
 
 function saved(deposit) {
