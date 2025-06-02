@@ -20,7 +20,13 @@
           :max-date="new Date()"
         />
         <div class="flex gap-2">
-          <Button icon="pi pi-table" severity="success" label="Descargar Excel" @click="descargarExcel" />
+          <Button
+            icon="pi pi-table"
+            severity="success"
+            label="Descargar Excel"
+            :disabled="dataTable.length === 0"
+            @click="descargarExcel"
+          />
 
           <Select
             v-model="movementTypeFilter"
