@@ -58,7 +58,7 @@
                   <span class="font-bold text-blue-400">{{ formatterMoney({ value: budget.amount }) }}</span>
                 </span>
               </div>
-              <div class="flex flex-col gap-2 items-end">
+              <!-- <div class="flex flex-col gap-2 items-end">
                 <Button icon="pi pi-pencil" rounded text class="hover:bg-green-100/10" @click="openModalForm(budget)" />
                 <Button
                   icon="pi pi-trash"
@@ -68,7 +68,7 @@
                   class="hover:bg-red-100/10"
                   @click="confirmDeleteBudget(budget)"
                 />
-              </div>
+              </div> -->
             </div>
           </div>
         </template>
@@ -93,13 +93,13 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import ModalForm from "./ModalForm.vue";
-import { useToast } from "primevue/usetoast";
-import { useConfirm } from "primevue/useconfirm";
+// import { useToast } from "primevue/usetoast";
+// import { useConfirm } from "primevue/useconfirm";
 import { formatterMoney } from "@/composables/useUtils";
 import { useGetBudget } from "@/service/useBudget";
 
-const toast = useToast();
-const confirm = useConfirm();
+// const toast = useToast();
+// const confirm = useConfirm();
 
 const { getBudgets, listBudget, loading: loadingBudgets, listExpenseTypeOnBudget } = useGetBudget();
 
@@ -132,22 +132,22 @@ function saveBudget(budget) {
   closeModalForm();
 }
 
-function confirmDeleteBudget(budget) {
-  confirm.require({
-    message: "¿Seguro que deseas eliminar este presupuesto?",
-    header: "Confirmar eliminación",
-    icon: "pi pi-exclamation-triangle",
-    acceptLabel: "Sí, eliminar",
-    rejectLabel: "Cancelar",
-    accept: () => {
-      listBudget.value = listBudget.value.filter((b) => b.id !== budget.id);
-      toast.add({ severity: "success", summary: "Eliminado", detail: "Presupuesto eliminado", life: 2000 });
-    },
-    reject: () => {
-      toast.add({ severity: "info", summary: "Cancelado", detail: "Eliminación cancelada", life: 2000 });
-    },
-  });
-}
+// function confirmDeleteBudget(budget) {
+//   confirm.require({
+//     message: "¿Seguro que deseas eliminar este presupuesto?",
+//     header: "Confirmar eliminación",
+//     icon: "pi pi-exclamation-triangle",
+//     acceptLabel: "Sí, eliminar",
+//     rejectLabel: "Cancelar",
+//     accept: () => {
+//       listBudget.value = listBudget.value.filter((b) => b.id !== budget.id);
+//       toast.add({ severity: "success", summary: "Eliminado", detail: "Presupuesto eliminado", life: 2000 });
+//     },
+//     reject: () => {
+//       toast.add({ severity: "info", summary: "Cancelado", detail: "Eliminación cancelada", life: 2000 });
+//     },
+//   });
+// }
 
 onMounted(() => {
   getBudgets();

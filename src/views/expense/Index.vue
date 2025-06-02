@@ -2,7 +2,15 @@
   <div class="flex justify-between items-center mb-4">
     <h1 class="text-2xl font-bold">Administracion de Gastos</h1>
     <div class="flex gap-5">
-      <Button severity="warn" label="Nuevo Tipo de gasto" class="ml-auto" icon="pi pi-plus" link to="expense-type" />
+      <Button
+        severity="warn"
+        label="Nuevo Tipo de gasto"
+        link
+        class="ml-auto"
+        icon="pi pi-plus"
+        as="router-link"
+        to="/expense-type"
+      />
       <Button label="Agregar gasto" class="ml-auto" icon="pi pi-plus" @click="openModal" />
     </div>
   </div>

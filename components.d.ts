@@ -12,7 +12,10 @@ declare module 'vue' {
     Calendar: typeof import('primevue/calendar')['default']
     Card: typeof import('primevue/card')['default']
     CardSkeleton: typeof import('./src/components/custom/CardSkeleton.vue')['default']
+    Checkbox: typeof import('primevue/checkbox')['default']
+    Column: typeof import('primevue/column')['default']
     ConfirmDialog: typeof import('primevue/confirmdialog')['default']
+    DataTable: typeof import('primevue/datatable')['default']
     DatePicker: typeof import('primevue/datepicker')['default']
     Dialog: typeof import('primevue/dialog')['default']
     EmptyData: typeof import('./src/components/custom/EmptyData.vue')['default']
@@ -24,6 +27,7 @@ declare module 'vue' {
     InputText: typeof import('primevue/inputtext')['default']
     Loading: typeof import('./src/components/custom/Loading.vue')['default']
     NotificationsWidget: typeof import('./src/components/dashboard/NotificationsWidget.vue')['default']
+    Password: typeof import('primevue/password')['default']
     RecentSalesWidget: typeof import('./src/components/dashboard/RecentSalesWidget.vue')['default']
     RevenueStreamWidget: typeof import('./src/components/dashboard/RevenueStreamWidget.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -32,6 +36,7 @@ declare module 'vue' {
     SelectButton: typeof import('primevue/selectbutton')['default']
     Skeleton: typeof import('primevue/skeleton')['default']
     StatsWidget: typeof import('./src/components/dashboard/StatsWidget.vue')['default']
+    Tag: typeof import('primevue/tag')['default']
     Toast: typeof import('primevue/toast')['default']
   }
   export interface ComponentCustomProperties {
