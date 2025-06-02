@@ -104,12 +104,23 @@ import { useGetBudget } from "@/service/useBudget";
 const { getBudgets, listBudget, loading: loadingBudgets, listExpenseTypeOnBudget } = useGetBudget();
 
 const showModal = ref(false);
-const budgetToEdit = ref({});
+const budgetToEdit = ref(null);
 const expenseTypeFilter = ref(null);
 const search = ref("");
 
 const filteredBudgets = computed(() => {
-  return listBudget.value;
+  return listBudget.value.filter((budget) => {
+    const matchesExpenseType = expenseTypeFilter.value ? budget.expenseType?.id === expenseTypeFilter.value : true;
+
+    const searchLower = search.value.toLowerCase();
+    const matchesSearch = search.value
+      ? budget.expenseType?.name?.toLowerCase().includes(searchLower) ||
+        budget.expenseType?.code?.toLowerCase().includes(searchLower) ||
+        budget.month?.toLowerCase().includes(searchLower)
+      : true;
+
+    return matchesExpenseType && matchesSearch;
+  });
 });
 
 function formatMonth(dateStr) {
@@ -124,7 +135,7 @@ function openModalForm(budget) {
 
 function closeModalForm() {
   showModal.value = false;
-  budgetToEdit.value = {};
+  budgetToEdit.value = null;
 }
 
 function saveBudget(budget) {
