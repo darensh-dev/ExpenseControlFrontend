@@ -3,13 +3,13 @@
   <div class="flex gap-4 justify-end my-4">
     <IconField>
       <InputIcon class="pi pi-search" />
-      <InputText id="fm-search-1" type="text" placeholder="Filtrar" />
+      <InputText id="fm-search-1" v-model="search" type="text" placeholder="Filtrar" />
     </IconField>
     <Button label="Agregar" icon="pi pi-plus" @click="openModalForm()" />
   </div>
   <div class="grid grid-cols-3 gap-4">
-    <template v-if="!loadingGetMonetaryFunds && listMonetaryFunds.length > 0">
-      <template v-for="(monetary, i) in listMonetaryFunds" :key="i">
+    <template v-if="!loadingGetMonetaryFunds && filteredFunds.length > 0">
+      <template v-for="(monetary, i) in filteredFunds" :key="i">
         <div class="col">
           <Card class="">
             <template #title>
@@ -65,7 +65,7 @@
       </template>
     </template>
   </div>
-  <template v-if="!loadingGetMonetaryFunds && listMonetaryFunds.length === 0">
+  <template v-if="!loadingGetMonetaryFunds && filteredFunds.length === 0">
     <EmptyData />
   </template>
   <ModalForm :show-modal="showModal" :fund="fundToEdit" @cancel="closeModalForm" @saved="addMonetaryFund" />
@@ -77,7 +77,7 @@ import { useNotify } from "@/composables/useNotify";
 import { formatterMoney, getRelativeDate } from "@/composables/useUtils";
 import { apiV1 } from "@/config/endpoints";
 import { useConfirm } from "primevue/useconfirm";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import ModalForm from "./ModalForm.vue";
 
 const toast = useNotify();
@@ -87,6 +87,18 @@ const showModal = ref(false);
 const listMonetaryFunds = ref([]);
 const loadingGetMonetaryFunds = ref(false);
 const fundToEdit = ref(null);
+
+const search = ref("");
+
+const filteredFunds = computed(() => {
+  return listMonetaryFunds.value.filter((fund) => {
+    const searchLower = search.value.toLowerCase();
+
+    return search.value
+      ? fund.name?.toLowerCase().includes(searchLower) || fund.fundType?.name?.toLowerCase().includes(searchLower)
+      : true;
+  });
+});
 
 const openModalForm = (monetary) => {
   if (monetary) fundToEdit.value = monetary;
