@@ -20,6 +20,8 @@
           :max-date="new Date()"
         />
         <div class="flex gap-2">
+          <Button icon="pi pi-table" severity="success" label="Descargar Excel" @click="descargarExcel" />
+
           <Select
             v-model="movementTypeFilter"
             :options="listMovementTypes"
@@ -62,6 +64,8 @@ import { useNotify } from "@/composables/useNotify";
 import { apiV1 } from "@/config/endpoints";
 import { DateTime } from "luxon";
 import { uniqBy } from "lodash-es";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 const toast = useNotify();
 
@@ -117,6 +121,31 @@ const getDataTable = async () => {
     loadingData.value = false;
   }
 };
+
+function descargarExcel() {
+  exportToExcel(dataTable.value);
+}
+
+function exportToExcel(data, fileName = "movements.xlsx") {
+  const formattedData = data.map((item) => ({
+    Tipo: item.movementType,
+    Fecha: new Date(item.movementDate).toLocaleDateString(),
+    Fondo: item.fundName,
+    Documento: item.documentType,
+    Comercio: item.tradeName,
+    Categoría: item.expenseType,
+    Monto: item.amount,
+    Notas: item.notes,
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(formattedData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Movimientos");
+
+  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+  const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+  saveAs(blob, fileName);
+}
 
 watch(dateRange, () => {
   if (!!dateRange.value[0] && !!dateRange.value[1]) getDataTable();
