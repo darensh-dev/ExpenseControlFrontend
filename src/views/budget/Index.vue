@@ -25,40 +25,37 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <template v-if="!loadingBudgets && filteredBudgets.length > 0">
         <template v-for="budget in filteredBudgets" :key="budget.id">
-          <div
-            class="bg-[#181f2a] rounded-2xl shadow-xl p-7 flex flex-col gap-3 relative border border-transparent hover:border-green-400 hover:shadow-2xl transition-all duration-200 min-h-[220px]"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <div class="flex items-center gap-4">
-                <span
-                  class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-white text-3xl shadow-lg"
-                >
-                  <i class="pi pi-chart-bar" />
-                </span>
-                <div>
-                  <h2 class="text-2xl font-bold text-white">{{ budget.expenseType.name }}</h2>
-                  <div class="text-sm text-gray-400 mt-1">{{ formatMonth(budget.month) }}</div>
+          <Card>
+            <template #content>
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-4">
+                  <span
+                    class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-3xl shadow-lg"
+                  >
+                    <i class="pi pi-chart-bar" />
+                  </span>
+                  <div>
+                    <h2 class="text-2xl font-bold">{{ budget.expenseType.name }}</h2>
+                    <div class="text-sm mt-1">{{ formatMonth(budget.month) }}</div>
+                  </div>
                 </div>
+                <Chip class="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold shadow-sm">
+                  <i class="pi pi-wallet mr-2" />
+                  {{ budget.expenseType.name }}
+                </Chip>
               </div>
-              <span
-                class="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold shadow-sm bg-gray-700 text-white"
-              >
-                <i class="pi pi-wallet mr-2" />
-                {{ budget.expenseType.name }}
-              </span>
-            </div>
-            <div class="flex flex-row items-center justify-between mt-2">
-              <div class="flex flex-col gap-1">
-                <span class="text-md text-gray-300 flex items-center gap-2">
-                  <i class="pi pi-arrow-up-right text-green-400 text-lg" /> M. Inicial:
-                  <span class="font-bold text-green-400">{{ formatterMoney({ value: budget.amount }) }}</span>
-                </span>
-                <span class="text-md text-gray-300 flex items-center gap-2">
-                  <i class="pi pi-dollar text-blue-400 text-lg" /> M. Actual:
-                  <span class="font-bold text-blue-400">{{ formatterMoney({ value: budget.amount }) }}</span>
-                </span>
-              </div>
-              <!-- <div class="flex flex-col gap-2 items-end">
+              <div class="flex flex-row items-center justify-between mt-2">
+                <div class="flex flex-col gap-1">
+                  <span class="text-md text-gray-300 flex items-center gap-2">
+                    <i class="pi pi-arrow-up-right text-green-400 text-lg" /> M. Inicial:
+                    <span class="font-bold text-green-400">{{ formatterMoney({ value: budget.amount }) }}</span>
+                  </span>
+                  <span class="text-md text-gray-300 flex items-center gap-2">
+                    <i class="pi pi-dollar text-blue-400 text-lg" /> M. Actual:
+                    <span class="font-bold text-blue-400">{{ formatterMoney({ value: budget.amount }) }}</span>
+                  </span>
+                </div>
+                <!-- <div class="flex flex-col gap-2 items-end">
                 <Button icon="pi pi-pencil" rounded text class="hover:bg-green-100/10" @click="openModalForm(budget)" />
                 <Button
                   icon="pi pi-trash"
@@ -69,8 +66,9 @@
                   @click="confirmDeleteBudget(budget)"
                 />
               </div> -->
-            </div>
-          </div>
+              </div>
+            </template>
+          </Card>
         </template>
       </template>
       <template v-if="loadingBudgets">
