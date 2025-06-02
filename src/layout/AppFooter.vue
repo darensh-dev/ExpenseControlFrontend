@@ -1,14 +1,13 @@
-<script setup></script>
-
 <template>
   <div class="layout-footer">
-    SAKAI by
+    Smart Expense Control by
     <a
-      href="https://primevue.org"
+      href="https://github.com/darensh-dev"
       target="_blank"
       rel="noopener noreferrer"
       class="text-primary font-bold hover:underline"
-      >PrimeVue</a
     >
+      darendev
+    </a>
   </div>
 </template>
